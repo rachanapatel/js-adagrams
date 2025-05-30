@@ -6,9 +6,7 @@ const letterCounts = [["A", 9], ["B", 2], ["C", 2], ["D", 4], ["E", 12], ["F", 2
 
 
 
-
 export const drawLetters = () => {
-  // Implement this method for wave 1
   const generatedHandDist = {};
   const generatedHand = [];
   const handSize = 10;
@@ -41,7 +39,29 @@ function getRandomInt(min, max) {
 
 
 export const usesAvailableLetters = (input, lettersInHand) => {
-  // Implement this method for wave 2
+  const lettersList = input.split("");
+  const lettersInHandDict = createLetterFreqDict(lettersInHand);
+  const inputDict = createLetterFreqDict(lettersList);
+
+  for (const key in inputDict) {
+    if (!(key in lettersInHandDict) || (lettersInHandDict[key] < inputDict[key])) {
+      return false;
+    }
+  }
+  return true;
+};
+
+
+function createLetterFreqDict(lettersInHand) {
+  const letterCount = {};
+  for (const char of lettersInHand) {
+    if (char in letterCount) {
+      letterCount[char]++;
+    } else {
+      letterCount[char] = 1;
+    }
+  }
+  return letterCount
 };
 
 export const scoreWord = (word) => {
