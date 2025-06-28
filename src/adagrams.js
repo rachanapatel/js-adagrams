@@ -23,13 +23,15 @@ export const drawLetters = () => {
   while (generatedHand.length !== handSize) {
     indexVal = getRandomInt(0, letterCounts.length);
     randLetterArr = letterCounts[indexVal];
-    if (!(randLetterArr[0] in generatedHandDist)) {
-      generatedHandDist[randLetterArr[0]] = 1;
-      generatedHand.push(randLetterArr[0]);
+    const letter = randLetterArr[0];
+    const maxCount = randLetterArr[1];
+    if (!(letter in generatedHandDist)) {
+      generatedHandDist[letter] = 1;
+      generatedHand.push(letter);
     } else {
-      if (randLetterArr[1] < generatedHandDist[randLetterArr[0]]) {
-        generatedHandDist[randLetterArr[0]]++;
-        generatedHand.push(randLetterArr[0]);
+      if (maxCount > generatedHandDist[letter]) {
+        generatedHandDist[letter]++;
+        generatedHand.push(letter);
       }
     }
   }
